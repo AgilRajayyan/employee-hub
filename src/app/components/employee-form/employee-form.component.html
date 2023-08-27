@@ -1,0 +1,74 @@
+<mat-toolbar color="primary">
+  <span>{{ navbarTitle }}</span>
+  <mat-icon *ngIf="mode === 'EDIT'" (click)="deleteEmployeeData()">
+    delete_outline
+  </mat-icon>
+</mat-toolbar>
+<mat-spinner *ngIf="isLoading; else content"></mat-spinner>
+<ng-template #content>
+  <form [formGroup]="employeeForm" (ngSubmit)="onFormSubmit()">
+    <div class="input-fields-container">
+      <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <mat-icon matPrefix color="primary">person_outline</mat-icon>
+        <input
+          type="text"
+          matInput
+          placeholder="Enter your name"
+          formControlName="name"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Select role</mat-label>
+        <mat-icon matPrefix color="primary">work_outline</mat-icon>
+        <mat-select formControlName="role">
+          <mat-option *ngFor="let role of roles" [value]="role">
+            {{ role }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="date-inputs-container">
+        <mat-form-field appearance="outline">
+          <mat-label>Joining date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="joiningDatePicker"
+            formControlName="joiningDate"
+          />
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="joiningDatePicker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #joiningDatePicker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Last date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="lastDatepicker"
+            formControlName="lastDate"
+          />
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="lastDatepicker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #lastDatepicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="buttons-container">
+      <button class="cancel-button" type="button" routerLink="/employees">
+        Cancel
+      </button>
+      <button
+        class="save-button"
+        color="primary"
+        type="submit"
+        [disabled]="employeeForm.invalid"
+        [ngClass]="{ disabled: employeeForm.invalid }"
+      >
+        Save
+      </button>
+    </div>
+  </form>
+</ng-template>

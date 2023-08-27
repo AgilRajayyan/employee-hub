@@ -13,11 +13,15 @@ export class EmployeeService {
     return this.dbService.getAll('employees');
   }
 
+  getEmployee(id: number): Observable<Employee> {
+    return this.dbService.getByID('employees', id);
+  }
+
   addEmployee(employee: {
     name: string;
     role: string;
-    joiningDate: string;
-    lastDate: string;
+    joiningDate: Date;
+    lastDate: Date | null;
   }): Observable<Employee> {
     return this.dbService.add('employees', employee);
   }

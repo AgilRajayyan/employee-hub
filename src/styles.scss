@@ -1,7 +1,6 @@
-
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
-@use '@angular/material' as mat;
+@use "@angular/material" as mat;
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -12,7 +11,41 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$employee-hub-primary: mat.define-palette(mat.$indigo-palette);
+$dark-primary-text: #323238;
+$light-primary-text: #fff;
+$primary-palette: (
+  50: #1da1f2,
+  100: #1da1f2,
+  200: #1da1f2,
+  300: #1da1f2,
+  400: #1da1f2,
+  500: #1da1f2,
+  600: #1da1f2,
+  700: #1da1f2,
+  800: #1da1f2,
+  900: #1da1f2,
+  A100: #1da1f2,
+  A200: #1da1f2,
+  A400: #1da1f2,
+  A700: #1da1f2,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $light-primary-text,
+    400: $dark-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $dark-primary-text,
+    A400: $dark-primary-text,
+    A700: $light-primary-text,
+  ),
+);
+$employee-hub-primary: mat.define-palette($primary-palette, 500, 300, 700);
 $employee-hub-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
@@ -20,19 +53,30 @@ $employee-hub-warn: mat.define-palette(mat.$red-palette);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
-$employee-hub-theme: mat.define-light-theme((
-  color: (
-    primary: $employee-hub-primary,
-    accent: $employee-hub-accent,
-    warn: $employee-hub-warn,
+$employee-hub-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $employee-hub-primary,
+      accent: $employee-hub-accent,
+      warn: $employee-hub-warn,
+    ),
   )
-));
+);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include mat.all-component-themes($employee-hub-theme);
 
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+mat-spinner {
+  margin: 20vh auto 0 auto;
+}
